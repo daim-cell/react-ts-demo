@@ -6,9 +6,17 @@ import { authAction } from "../store/auth-slice";
 const Auth = () => {
   const dispatch =useDispatch();
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
-    console.log('here')
     e.preventDefault();
-    dispatch(authAction.login());
+    const form = e.currentTarget;
+    const idInput = form.querySelector('input[name="id"]') as HTMLInputElement;
+    const passInput = form.querySelector('input[name="password"]') as HTMLInputElement;
+
+    const idValue = idInput.value;
+    const passValue = passInput.value;
+
+    if(idValue === 'daim' && passValue ==='1234'){
+      dispatch(authAction.login());
+    }
   }
   return (
     <div className="container">

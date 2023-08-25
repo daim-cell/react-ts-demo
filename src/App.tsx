@@ -6,7 +6,6 @@ import { RootState } from './store';
 
 function App() {
   const isLoggedIn:boolean=useSelector((state:RootState)=>state.auth.isLoggedIn)
-  console.log(isLoggedIn)
   return (
     <div className="App">
       {!isLoggedIn && <Auth /> }
