@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { productProps } from "../Components/Product";
+import { v4 as uuidv4 } from 'uuid';
 
     export type cartItem = {
         product: productProps,
@@ -9,14 +10,16 @@ import { productProps } from "../Components/Product";
     interface CartState {
         itemsList: cartItem[],
         totalPrice: number,
-        showCart: boolean
+        showCart: boolean,
+        UUID: string
 
     }
   
     const initialState: CartState = {
         itemsList: [],
         totalPrice:0,
-        showCart:false
+        showCart:false,
+        UUID: uuidv4()
     };
 const cartSlice = createSlice({
     name:'cart',
@@ -36,7 +39,7 @@ const cartSlice = createSlice({
             const id:number = action.payload;
             const existingItem:cartItem|undefined = state.itemsList.find((item)=> item.product.id === id);
             if(existingItem){
-                if(existingItem.quantity ===1 ){const temp:cartItem[] = state.itemsList.filter((item)=> item.product.id != id); state.itemsList=temp}
+                if(existingItem.quantity ===1 ){const temp:cartItem[] = state.itemsList.filter((item)=> item.product.id !== id); state.itemsList=temp}
                 else{existingItem.quantity--; existingItem.totalPrice -= existingItem.product.price;}
                 state.totalPrice -= existingItem.product.price
             }
