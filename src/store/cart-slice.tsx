@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
         totalPrice: number,
         quantity: number
     }
-    interface CartState {
+    export interface CartState {
         itemsList: cartItem[],
         totalPrice: number,
         showCart: boolean,
