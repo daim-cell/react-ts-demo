@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { productProps } from "../Components/Product";
 import { v4 as uuidv4 } from 'uuid';
 
+
     export type cartItem = {
         product: productProps,
         totalPrice: number,
@@ -14,17 +15,22 @@ import { v4 as uuidv4 } from 'uuid';
         UUID: string
 
     }
-  
+    export const uu = uuidv4()
     const initialState: CartState = {
         itemsList: [],
         totalPrice:0,
         showCart:false,
-        UUID: uuidv4()
+        UUID: uu
     };
 const cartSlice = createSlice({
     name:'cart',
     initialState,
     reducers:{
+        replaceCart(state,action){
+            state.itemsList = action.payload.itemsList;
+            state.totalPrice = action.payload.totalPrice;
+
+        },
         addToCart(state, action){
             const newItem:productProps = action.payload;
 
@@ -52,6 +58,9 @@ const cartSlice = createSlice({
 
     }
 })
+
+
+
 
 export const cartActions = cartSlice.actions;
 
