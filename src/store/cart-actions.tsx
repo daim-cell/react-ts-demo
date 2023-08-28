@@ -77,7 +77,8 @@ export const fetchCart=() =>{
                     }))
                 }
                 else{
-                    // dispatch(cartActions.replaceCart(data))
+                    if (data.length !==0)
+                    {dispatch(cartActions.replaceCart(data[0]));}
                 }
             } 
             catch(err:unknown){
